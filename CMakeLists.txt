@@ -13,6 +13,9 @@ target_include_directories(tinygltf
         PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         ${RapidJSON_INCLUDE_DIRS})
 
+#
+# TinuGLTF is a header-only library, so no library build. just install header files.
+#
 INSTALL ( FILES
   json.hpp
   include/stb_image.h
