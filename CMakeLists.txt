@@ -4,19 +4,23 @@ PROJECT (tinygltf)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_EXECUTABLE ( loader_example
-  loader_example.cc
-  )
+add_library(tinygltf INTERFACE)
 
-ADD_SUBDIRECTORY ( examples/gltfutil )
-ADD_SUBDIRECTORY ( examples/glview )
-ADD_SUBDIRECTORY ( examples/validator )
+target_compile_definitions(tinygltf
+        INTERFACE -DTINYGLTF_IMPLEMENTATION
+        -DTINYGLTF_USE_RAPIDJSON
+        -DSTB_IMAGE_IMPLEMENTATION
+        -DSTB_IMAGE_WRITE_IMPLEMENTATION)
+
+target_include_directories(tinygltf
+        INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        ${RapidJSON_INCLUDE_DIRS})
 
 INSTALL ( FILES
   json.hpp
-  stb_image.h
-  stb_image_write.h
-  tiny_gltf.h
+  include/stb_image.h
+  include/stb_image_write.h
+  include/tiny_gltf.h
   DESTINATION
   include
   )
