@@ -4,16 +4,13 @@ PROJECT (tinygltf)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-add_library(tinygltf INTERFACE)
+add_library(tinygltf STATIC src/tiny_gltf.cpp)
 
 target_compile_definitions(tinygltf
-        INTERFACE -DTINYGLTF_IMPLEMENTATION
-        -DTINYGLTF_USE_RAPIDJSON
-        -DSTB_IMAGE_IMPLEMENTATION
-        -DSTB_IMAGE_WRITE_IMPLEMENTATION)
+        PUBLIC -DTINYGLTF_USE_RAPIDJSON)
 
 target_include_directories(tinygltf
-        INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         ${RapidJSON_INCLUDE_DIRS})
 
 INSTALL ( FILES
